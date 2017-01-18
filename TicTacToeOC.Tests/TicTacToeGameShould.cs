@@ -1,10 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
-using NUnit.Framework.Internal.Execution;
 
 namespace TicTacToeOC.Tests
 {
@@ -28,8 +23,7 @@ namespace TicTacToeOC.Tests
             
             startedGame.Should().NotBe(newGame);
         }
-
-
+        
         [Test]
         public void BeDifferentToGamePlayedAtTopRight_GivePlayedAtTopLeft()
         {
@@ -39,6 +33,19 @@ namespace TicTacToeOC.Tests
             topRightGame.Play(Position.TopRight);
 
             topLeftGame.Should().NotBe(topRightGame);
+        }
+
+        [Test]
+        public void BeDifferentToGameWithSameLastPlay_GivenStartedDifferently()
+        {
+            var game = new TicTacToeGame();
+            var differentGame = new TicTacToeGame();
+            game.Play(Position.TopLeft);
+            differentGame.Play(Position.TopMiddle);
+            game.Play(Position.CenterLeft);
+            differentGame.Play(Position.CenterLeft);
+
+            game.Should().NotBe(differentGame);
         }
     }
 }

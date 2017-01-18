@@ -1,15 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TicTacToeOC
 {
     public class TicTacToeGame
     {
         private int playedMoves = 0;
-        private Position position;
+        private Position currentPosition;
+        private readonly List<Position> playedPositions = new List<Position>();
 
         protected bool Equals(TicTacToeGame other)
         {
-            return playedMoves == other.playedMoves && position == other.position;
+            return playedMoves == other.playedMoves 
+                && currentPosition == other.currentPosition
+                && playedPositions.SequenceEqual(other.playedPositions);
         }
 
         public override bool Equals(object obj)
@@ -24,14 +29,18 @@ namespace TicTacToeOC
         {
             unchecked
             {
-                return (playedMoves*397) ^ (int) position;
+                var hashCode = playedMoves;
+                hashCode = (hashCode*397) ^ (int) currentPosition;
+                hashCode = (hashCode*397) ^ (playedPositions != null ? playedPositions.GetHashCode() : 0);
+                return hashCode;
             }
         }
 
         public void Play(Position position)
         {
-            this.position = position;
+            currentPosition = position;
             playedMoves += 1;
+            playedPositions.Add(position);
         }
     }
 }

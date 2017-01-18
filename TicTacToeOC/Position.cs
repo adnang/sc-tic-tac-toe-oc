@@ -3,6 +3,9 @@
     public enum Position
     {
         TopLeft,
-        TopRight
+        TopRight,
+        TopMiddle,
+        CenterLeft,
+        None
     }
 }
