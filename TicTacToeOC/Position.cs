@@ -2,6 +2,7 @@
 {
     public enum Position
     {
-        TopLeft
+        TopLeft,
+        TopRight
     }
 }

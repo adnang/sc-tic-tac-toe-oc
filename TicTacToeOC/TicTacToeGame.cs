@@ -5,10 +5,11 @@ namespace TicTacToeOC
     public class TicTacToeGame
     {
         private int playedMoves = 0;
+        private Position position;
 
         protected bool Equals(TicTacToeGame other)
         {
-            return playedMoves == other.playedMoves;
+            return playedMoves == other.playedMoves && position == other.position;
         }
 
         public override bool Equals(object obj)
@@ -21,11 +22,15 @@ namespace TicTacToeOC
 
         public override int GetHashCode()
         {
-            return playedMoves;
+            unchecked
+            {
+                return (playedMoves*397) ^ (int) position;
+            }
         }
 
         public void Play(Position position)
         {
+            this.position = position;
             playedMoves += 1;
         }
     }

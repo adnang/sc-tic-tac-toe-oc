@@ -28,5 +28,17 @@ namespace TicTacToeOC.Tests
             
             startedGame.Should().NotBe(newGame);
         }
+
+
+        [Test]
+        public void BeDifferentToGamePlayedAtTopRight_GivePlayedAtTopLeft()
+        {
+            var topLeftGame = new TicTacToeGame();
+            topLeftGame.Play(Position.TopLeft);
+            var topRightGame = new TicTacToeGame();
+            topRightGame.Play(Position.TopRight);
+
+            topLeftGame.Should().NotBe(topRightGame);
+        }
     }
 }
